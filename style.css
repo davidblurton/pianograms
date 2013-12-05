@@ -1,0 +1,15 @@
+.key {
+  stroke: black;
+}
+
+.white {
+  fill: white;
+}
+
+.black {
+  fill: black;
+}
+
+.selected {
+  fill: #FFF691;
+}
