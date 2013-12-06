@@ -5,8 +5,9 @@ app.AppView = Backbone.View.extend({
 
   initialize: function() {
     this.addOne(new app.Key());
-    //this.listenTo(this.model, "change", this.render);
   },
+
+  //AppView should create the collection, which should create all the keys
 
   addOne: function(key){
     var view = new app.KeyView({model: key});
