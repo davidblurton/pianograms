@@ -1,5 +1,14 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Title
+  section#diagram
+  
+  script#name-template(type='text/template').
+    <input value="<%- name %>" />
+
+block scripts
+  script(src='js/models/chord.js')
+  script(src='js/views/name.js')
+  script(src='js/collections/collection.js')
+  script(src='js/views/app.js')

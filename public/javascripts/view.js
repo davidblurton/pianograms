@@ -1,1 +1,0 @@
-var chordView = Backbone.View.extend({});
