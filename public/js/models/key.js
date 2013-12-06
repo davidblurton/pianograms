@@ -7,6 +7,6 @@ app.Key = Backbone.Model.extend({
   },
 
   url: function(){
-    return "";
+    return this.id;
   },
 });
