@@ -25,11 +25,16 @@ app.KeyView = app.SvgBackboneView.extend({
   },
 
   render: function() {
-  	return this;
+  	if(this.model.get('selected')){
+      this.$el.addClass('selected');
+    } else {
+      this.$el.removeClass('selected');
+    }
+    
+    return this;
   },
 
   toggleSelect: function(e){
-    this.model.set('selected', !this.model.selected);
-    console.log(this.model);
+    this.model.set('selected', !this.model.get('selected'));
   }
 });
