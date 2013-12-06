@@ -3,13 +3,13 @@ var app = app || {};
 app.KeyView = app.SvgBackboneView.extend({
   tagName: 'rect',
 
-  initialize: function(model, x){
+  initialize: function(model, x) {
     this.x = x;
 
     this.listenTo(this.model, 'change', this.render);
   },
 
-  id: function(){
+  id: function() {
     return this.model.id;
   },
 
@@ -34,13 +34,16 @@ app.KeyView = app.SvgBackboneView.extend({
   }
 });
 
+app.KeyView.whiteKeyWidth = 23;
+app.KeyView.blackKeyWidth = 13;
+
 app.WhiteKeyView = app.KeyView.extend({
   
   className: 'white key',
 
   attributes: {
     y: 0,
-    width: 23,
+    width: app.KeyView.whiteKeyWidth,
     height: 120,
   },
 });
@@ -51,7 +54,7 @@ app.BlackKeyView = app.KeyView.extend({
 
   attributes: {
     y: 0,
-    width: 13,
+    width: app.KeyView.blackKeyWidth,
     height: 80,
   },
 });
