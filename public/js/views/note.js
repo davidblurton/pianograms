@@ -3,22 +3,14 @@ var app = app || {};
 app.KeyView = app.SvgBackboneView.extend({
   tagName: 'rect',
 
-  className: 'white key',
-
-  initialize: function(model, x, y){
+  initialize: function(model, x){
     this.x = x;
-    this.y = y;
 
     this.listenTo(this.model, 'change', this.render);
   },
 
   id: function(){
     return this.model.id;
-  },
-
-  attributes: {
-    width: 23,
-    height: 120,
   },
 
   events: {
@@ -33,7 +25,6 @@ app.KeyView = app.SvgBackboneView.extend({
     }
 
     this.$el.attr('x', this.x);
-    this.$el.attr('y', this.y);
 
     return this;
   },
@@ -41,4 +32,26 @@ app.KeyView = app.SvgBackboneView.extend({
   toggleSelect: function(e){
     this.model.set('selected', !this.model.get('selected'));
   }
+});
+
+app.WhiteKeyView = app.KeyView.extend({
+  
+  className: 'white key',
+
+  attributes: {
+    y: 0,
+    width: 23,
+    height: 120,
+  },
+});
+
+app.BlackKeyView = app.KeyView.extend({
+  
+  className: 'black key',
+
+  attributes: {
+    y: 0,
+    width: 13,
+    height: 80,
+  },
 });

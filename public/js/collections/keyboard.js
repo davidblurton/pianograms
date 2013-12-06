@@ -14,7 +14,7 @@ var Keyboard = Backbone.Collection.extend({
     var model = new app.Key();  
     this.add(model);
 
-    var view = new app.KeyView({model: model}, x, 0);
+    var view = new app.WhiteKeyView({model: model}, x);
     $('#keyboard').append( view.render().el );
   },
 });
