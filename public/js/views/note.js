@@ -5,7 +5,10 @@ app.KeyView = app.SvgBackboneView.extend({
 
   className: 'white key',
 
-  initialize: function(){
+  initialize: function(model, x, y){
+    this.x = x;
+    this.y = y;
+
     this.listenTo(this.model, 'change', this.render);
   },
 
@@ -14,8 +17,6 @@ app.KeyView = app.SvgBackboneView.extend({
   },
 
   attributes: {
-    x: 0,
-    y: 0,
     width: 23,
     height: 120,
   },
@@ -30,7 +31,10 @@ app.KeyView = app.SvgBackboneView.extend({
     } else {
       this.$el.removeClass('selected');
     }
-    
+
+    this.$el.attr('x', this.x);
+    this.$el.attr('y', this.y);
+
     return this;
   },
 
