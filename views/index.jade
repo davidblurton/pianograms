@@ -2,13 +2,13 @@ extends layout
 
 block content
   h1 Title
-  section#diagram
+  section#keyboard
   
-  script#name-template(type='text/template').
-    <input value="<%- name %>" />
+  script#key-template(type='text/template').
+    <rect id="1" x="0" y="0" width="23" height="120" data-selected="%- selected %" />
 
 block scripts
-  script(src='js/models/chord.js')
-  script(src='js/views/name.js')
-  script(src='js/collections/collection.js')
+  script(src='js/models/key.js')
+  script(src='js/views/note.js')
+  script(src='js/collections/keyboard.js')
   script(src='js/views/app.js')
