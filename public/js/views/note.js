@@ -1,6 +1,6 @@
 var app = app || {};
 
-app.KeyView = Backbone.View.extend({
+app.KeyView = app.SvgBackboneView.extend({
   tagName: 'rect',
 
   className: 'white key',
@@ -9,20 +9,25 @@ app.KeyView = Backbone.View.extend({
     return this.model.id;
   },
 
-  template: _.template($('#key-template').html()),
+  attributes: {
+    x: 0,
+    y: 0,
+    width: 23,
+    height: 120,
+  },
 
   events: {
     'click': 'toggleSelect'
   },
 
   render: function() {
-
+    //this.$el.attr('width', 13);
   	//this.$el.html(this.template(this.model.toJSON()));
   	return this;
   },
 
   toggleSelect: function(e){
-    this.model.setSelected(e);
+    this.model.setSelected();
     this.$el.toggleClass('selected');
   }
 });

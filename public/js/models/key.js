@@ -18,7 +18,9 @@ app.Key = Backbone.Model.extend({
     return "";
   },
 
-  setSelected: function(selected){
-    this.set({ selected: selected });
+  setSelected: function(){
+    if(!this.selected){
+      this.set({ selected: true });  
+    }
   }
 });
