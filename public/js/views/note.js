@@ -5,6 +5,10 @@ app.KeyView = app.SvgBackboneView.extend({
 
   className: 'white key',
 
+  initialize: function(){
+    this.listenTo(this.model, 'change', this.render);
+  },
+
   id: function(){
     return this.model.id;
   },
@@ -21,13 +25,11 @@ app.KeyView = app.SvgBackboneView.extend({
   },
 
   render: function() {
-    //this.$el.attr('width', 13);
-  	//this.$el.html(this.template(this.model.toJSON()));
   	return this;
   },
 
   toggleSelect: function(e){
-    this.model.setSelected();
-    this.$el.toggleClass('selected');
+    this.model.set('selected', !this.model.selected);
+    console.log(this.model);
   }
 });
