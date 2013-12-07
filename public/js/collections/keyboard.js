@@ -9,32 +9,38 @@ app.Keyboard = new Keyboard();
 app.KeyboardView = Backbone.View.extend({
   el: $('#keyboard'),
 
-  whiteKeyWidth: app.KeyView.whiteKeyWidth,
-  blackKeyWidth: app.KeyView.blackKeyWidth,
-
   initialize: function() {
     this.listenTo(app.Keyboard, 'reset', this.render);
-    
-    var keys = [];
 
-    this.createKeys(keys);
-
-    app.Keyboard.reset(keys);
+    app.Keyboard.reset(this.createKeys());
   },
 
-  createKeys: function(keys){
-    var i = 0;
+  createKeys: function(){
+    var i = 0, keys = [];
+
+    var whiteKeyWidth = app.KeyView.whiteKeyWidth;
+    var blackKeyWidth = app.KeyView.blackKeyWidth;
 
     for(var index = 0; index < 7; index++) {
-      var model = new app.Key({x: index * this.whiteKeyWidth, color: 'white', id: i});
-      i++;
-      keys.push(model);
+      i = keys.push(createWhiteKey(index, this.whiteKeyWidth));
 
       if(hasBlackKey(index)) {
-        var model = new app.Key({x: (index + 1) * this.whiteKeyWidth - this.blackKeyWidth / 2, color: 'black', id: i});
-        i++;
-        keys.push(model);
+        i = keys.push(createBlackKey(index, this.blackKeyWidth));
       }
+    }
+
+    return keys;
+
+    function createWhiteKey(index) {
+      return createKey(index * whiteKeyWidth, 'white');
+    }
+
+    function createBlackKey(index) {
+      return createKey((index + 1) * whiteKeyWidth - blackKeyWidth / 2, 'black');
+    }
+
+    function createKey(x, color) {
+      return new app.Key({x: x, color: color, id: i});
     }
 
     function hasBlackKey(index){
