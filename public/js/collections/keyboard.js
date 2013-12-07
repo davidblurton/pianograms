@@ -9,7 +9,9 @@ app.Keyboard = new Keyboard();
 app.KeyboardView = Backbone.View.extend({
     el: $('#keyboard'),
 
-    initialize: function () {
+    initialize: function (options) {
+        this.events = options.events;
+        
         this.listenTo(app.Keyboard, 'reset', this.render);
 
         app.Keyboard.reset(this.createKeys());

@@ -8,6 +8,7 @@ app.KeyView = app.SvgBackboneView.extend({
 
         this.listenTo(this.model, 'change', this.render);
         this.listenTo(this.model, 'change', this.updateUrl);
+        this.listenTo(this.model, 'change', this.raiseEvent);
     },
 
     id: function () {
@@ -41,6 +42,16 @@ app.KeyView = app.SvgBackboneView.extend({
         app.Router.navigate('diagram/' + selectedNotes.map(function (a) {
             return a.id;
         }).join());
+    },
+
+    raiseEvent: function () {
+        var selectedNotes = app.Keyboard.where({
+            selected: true
+        }).map(function (a) {
+            return a.id;
+        });
+
+        events.trigger('chord changed', selectedNotes);
     }
 });
 

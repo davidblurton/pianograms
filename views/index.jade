@@ -3,11 +3,14 @@ extends layout
 block content
   #app
     svg#keyboard(version="1.1" width="400" height="140")
+    
+    p#chord-description
 
 block scripts
   script(src='js/SvgBackboneView.js')
   script(src='js/models/key.js')
   script(src='js/views/note.js')
+  script(src='js/views/chord.js')
   script(src='js/collections/keyboard.js')
   script(src='js/views/app.js')
   script(src='js/routers/router.js')
