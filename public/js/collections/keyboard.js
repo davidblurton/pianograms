@@ -16,10 +16,10 @@ app.KeyboardView = Backbone.View.extend({
   },
 
   createKeys: function(){
-    var i = 0, keys = [];
-
     var whiteKeyWidth = app.KeyView.whiteKeyWidth;
     var blackKeyWidth = app.KeyView.blackKeyWidth;
+
+    var i = 0, keys = [];
 
     for(var index = 0; index < 7; index++) {
       i = keys.push(createWhiteKey(index, this.whiteKeyWidth));
