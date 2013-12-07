@@ -1,11 +1,13 @@
 var app = app || {};
 
 app.AppView = Backbone.View.extend({
-  el: $('#app'),
+    el: $('#app')
 });
 
-$(function() {
-  new app.KeyboardView();
-  new app.AppView();
-  Backbone.history.start({pushState: false})
+$(function () {
+    new app.KeyboardView();
+    new app.AppView();
+    Backbone.history.start({
+        pushState: false
+    });
 });

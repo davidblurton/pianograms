@@ -1,12 +1,12 @@
 var app = app || {};
 
 app.Key = Backbone.Model.extend({
-  defaults: {
-    label: '',
-    selected: false
-  },
+    defaults: {
+        label: '',
+        selected: false
+    },
 
-  url: function(){
-    return this.id;
-  },
+    url: function () {
+        return this.id;
+    }
 });
