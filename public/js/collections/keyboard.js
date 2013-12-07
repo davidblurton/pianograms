@@ -15,17 +15,13 @@ app.KeyboardView = Backbone.View.extend({
     app.Keyboard.reset(this.createKeys());
   },
 
-  keyCount: function() {
-    return 3 * 7;
-  },
-
   createKeys: function(){
     var whiteKeyWidth = app.KeyView.whiteKeyWidth;
     var blackKeyWidth = app.KeyView.blackKeyWidth;
 
-    var i = 0, keys = [];
+    var i = 0, keys = [], octaves = 3;
 
-    for(var index = 0; index < 7 * this.keyCount(); index++) {
+    for(var index = 0; index < 7 * octaves; index++) {
       i = keys.push(createWhiteKey(index, this.whiteKeyWidth));
 
       if(hasBlackKey(index)) {
@@ -56,15 +52,15 @@ app.KeyboardView = Backbone.View.extend({
   render: function() {
     app.Keyboard.where({color: 'white'}).forEach(function(model) {
       var view = new app.WhiteKeyView({model: model}, model.get('x'));
-      $('#keyboard').append( view.render().el );
-    });
+      this.append( view.render().el );
+    }, this.$el);
 
     app.Keyboard.where({color: 'black'}).forEach(function(model) {
       var view = new app.BlackKeyView({model: model}, model.get('x'));
-      $('#keyboard').append( view.render().el );
-    });
+      this.append( view.render().el );
+    }, this.$el);
 
-    $('#keyboard').width(this.keyCount() * app.KeyView.whiteKeyWidth)
+    this.$el.width(app.Keyboard.where({color: 'white'}).length * app.KeyView.whiteKeyWidth)
 
     return this;
   },
