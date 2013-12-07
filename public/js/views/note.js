@@ -7,6 +7,7 @@ app.KeyView = app.SvgBackboneView.extend({
     this.x = x;
 
     this.listenTo(this.model, 'change', this.render);
+    this.listenTo(this.model, 'change', this.updateUrl);
   },
 
   id: function() {
@@ -18,7 +19,7 @@ app.KeyView = app.SvgBackboneView.extend({
   },
 
   render: function() {
-  	if(this.model.get('selected')){
+  	if(this.model.get('selected')) {
       this.$el.addClass('selected');
     } else {
       this.$el.removeClass('selected');
@@ -29,8 +30,13 @@ app.KeyView = app.SvgBackboneView.extend({
     return this;
   },
 
-  toggleSelect: function(e){
+  toggleSelect: function(e) {
     this.model.set('selected', !this.model.get('selected'));
+  },
+
+  updateUrl: function() {
+    var selectedNotes = app.Keyboard.where({selected: true});
+    app.Router.navigate('diagram/' + selectedNotes.map(function(a){return a.id}).join('/'));
   }
 });
 
