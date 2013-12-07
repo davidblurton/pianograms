@@ -17,23 +17,22 @@ app.KeyboardView = Backbone.View.extend({
     
     var keys = [];
 
-    this.createWhiteKeys(keys);
-    this.createBlackKeys(keys);
+    this.createKeys(keys);
 
     app.Keyboard.reset(keys);
   },
 
-  createWhiteKeys: function(keys){
-    for(var index = 0; index < 7; index++) {
-      var model = new app.Key({x: index * this.whiteKeyWidth, color: 'white'});
-      keys.push(model);
-    }
-  },
+  createKeys: function(keys){
+    var i = 0;
 
-  createBlackKeys: function(keys){
     for(var index = 0; index < 7; index++) {
+      var model = new app.Key({x: index * this.whiteKeyWidth, color: 'white', id: i});
+      i++;
+      keys.push(model);
+
       if(hasBlackKey(index)) {
-        var model = new app.Key({x: (index + 1) * this.whiteKeyWidth - this.blackKeyWidth / 2, color: 'black'});
+        var model = new app.Key({x: (index + 1) * this.whiteKeyWidth - this.blackKeyWidth / 2, color: 'black', id: i});
+        i++;
         keys.push(model);
       }
     }
