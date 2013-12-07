@@ -13,22 +13,28 @@ app.KeyboardView = Backbone.View.extend({
   blackKeyWidth: app.KeyView.blackKeyWidth,
 
   initialize: function() {
-    this.listenTo(app.Keyboard, 'add', this.render);
+    this.listenTo(app.Keyboard, 'reset', this.render);
     
-    this.createWhiteKeys();
-    this.createBlackKeys();
+    var keys = [];
+
+    this.createWhiteKeys(keys);
+    this.createBlackKeys(keys);
+
+    app.Keyboard.reset(keys);
   },
 
-  createWhiteKeys: function(){
+  createWhiteKeys: function(keys){
     for(var index = 0; index < 7; index++) {
-      this.addKey(index * this.whiteKeyWidth, 'white');
+      var model = new app.Key({x: index * this.whiteKeyWidth, color: 'white'});
+      keys.push(model);
     }
   },
 
-  createBlackKeys: function(){
+  createBlackKeys: function(keys){
     for(var index = 0; index < 7; index++) {
       if(hasBlackKey(index)) {
-        this.addKey((index + 1) * this.whiteKeyWidth - this.blackKeyWidth / 2, 'black');
+        var model = new app.Key({x: (index + 1) * this.whiteKeyWidth - this.blackKeyWidth / 2, color: 'black'});
+        keys.push(model);
       }
     }
 
@@ -36,11 +42,6 @@ app.KeyboardView = Backbone.View.extend({
       var i = index % 7;
       return i === 0 || i === 1 || i === 3 || i == 4 || i == 5;
     }
-  },
-
-  addKey: function(x, color){
-    var model = new app.Key({x: x, color: color});  
-    app.Keyboard.add(model);
   },
 
   render: function() {
