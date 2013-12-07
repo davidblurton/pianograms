@@ -1,10 +1,15 @@
 var Router = Backbone.Router.extend({
   routes: {
-    'diagram/p:notes': 'diagram'
+    'diagram/*query': 'diagram'
   },
 
-  diagram: function(notes){
-    console.log(notes);
+  diagram: function(query){
+    var notes = query.split(',');
+
+    notes.forEach(function(id){
+      var note = app.Keyboard.get(id);
+      note.set({selected: true});
+    });
   }
 });
 

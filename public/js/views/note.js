@@ -36,7 +36,7 @@ app.KeyView = app.SvgBackboneView.extend({
 
   updateUrl: function() {
     var selectedNotes = app.Keyboard.where({selected: true});
-    app.Router.navigate('diagram/' + selectedNotes.map(function(a){return a.id}).join('/'));
+    app.Router.navigate('diagram/' + selectedNotes.map(function(a){return a.id}).join(','));
   }
 });
 
