@@ -1,26 +1,34 @@
 var app = app || {};
 
 var Keyboard = Backbone.Collection.extend({
-  
   model: app.Key,
+});
+
+app.Keyboard = new Keyboard();
+
+app.KeyboardView = Backbone.View.extend({
+  el: $('#keyboard'),
+
   whiteKeyWidth: app.KeyView.whiteKeyWidth,
   blackKeyWidth: app.KeyView.blackKeyWidth,
 
   initialize: function() {
+    this.listenTo(app.Keyboard, 'add', this.render);
+    
     this.createWhiteKeys();
     this.createBlackKeys();
   },
 
   createWhiteKeys: function(){
     for(var index = 0; index < 7; index++) {
-      this.addKey(index * this.whiteKeyWidth);
+      this.addKey(index * this.whiteKeyWidth, 'white');
     }
   },
 
   createBlackKeys: function(){
     for(var index = 0; index < 7; index++) {
       if(hasBlackKey(index)) {
-        this.addBlackKey((index + 1) * this.whiteKeyWidth - this.blackKeyWidth / 2);
+        this.addKey((index + 1) * this.whiteKeyWidth - this.blackKeyWidth / 2, 'black');
       }
     }
 
@@ -30,24 +38,25 @@ var Keyboard = Backbone.Collection.extend({
     }
   },
 
-  addKey: function(x){
-    var model = new app.Key();  
-    this.add(model);
-
-    var view = new app.WhiteKeyView({model: model}, x);
-    $('#keyboard').append( view.render().el );
+  addKey: function(x, color){
+    var model = new app.Key({x: x, color: color});  
+    app.Keyboard.add(model);
   },
 
-  addBlackKey: function(x){
-    var model = new app.Key();  
-    this.add(model);
+  render: function() {
+    app.Keyboard.where({color: 'white'}).forEach(function(model) {
+      var view = new app.WhiteKeyView({model: model}, model.get('x'));
+      $('#keyboard').append( view.render().el );
+    });
 
-    var view = new app.BlackKeyView({model: model}, x);
-    $('#keyboard').append( view.render().el );
+    app.Keyboard.where({color: 'black'}).forEach(function(model) {
+      var view = new app.BlackKeyView({model: model}, model.get('x'));
+      $('#keyboard').append( view.render().el );
+    });
+
+    return this;
   },
 });
-
-app.Keyboard = new Keyboard();
 
 Backbone.sync = function(method, model) {
   console.log("I've been passed " + method + " with " + JSON.stringify(model));

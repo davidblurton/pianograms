@@ -5,5 +5,6 @@ app.AppView = Backbone.View.extend({
 });
 
 $(function() {
+  new app.KeyboardView();
   new app.AppView();
 });
