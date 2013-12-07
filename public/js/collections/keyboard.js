@@ -45,7 +45,7 @@ app.KeyboardView = Backbone.View.extend({
 
     function hasBlackKey(index){
       var i = index % 7;
-      return i === 0 || i === 1 || i === 3 || i == 4 || i == 5;
+      return i !== 2 && i !== 6;
     }
   },
 
