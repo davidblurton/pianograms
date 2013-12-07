@@ -65,7 +65,3 @@ app.KeyboardView = Backbone.View.extend({
     return this;
   },
 });
-
-Backbone.sync = function(method, model) {
-  console.log("I've been passed " + method + " with " + JSON.stringify(model));
-};
