@@ -4,18 +4,20 @@ app.AppView = Backbone.View.extend({
     el: $('#app')
 });
 
-var events = _.extend({}, Backbone.Events);
-
 $(function () {
+    var chord = new app.Chord();
+    
     new app.KeyboardView({
-        events: events
+        model: chord
     });
     
     new app.AppView();
     
     new app.ChordView({
-        events: events
+        model: chord
     });
+    
+    app.Router = new Router({model: chord});
 
     Backbone.history.start({
         pushState: false

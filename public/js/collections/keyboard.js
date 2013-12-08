@@ -1,7 +1,10 @@
 var app = app || {};
 
+// remove this
 var Keyboard = Backbone.Collection.extend({
-    model: app.Key
+    model: app.Key,
+
+    url: 'diagram'
 });
 
 app.Keyboard = new Keyboard();
@@ -10,11 +13,12 @@ app.KeyboardView = Backbone.View.extend({
     el: $('#keyboard'),
 
     initialize: function (options) {
-        this.events = options.events;
-        
-        this.listenTo(app.Keyboard, 'reset', this.render);
+        this.model = options.model;
+        this.keyboard = app.Keyboard;
 
-        app.Keyboard.reset(this.createKeys());
+        this.listenTo(this.keyboard, 'reset', this.render);
+        
+        this.keyboard.reset(this.createKeys());
     },
 
     createKeys: function () {
@@ -58,23 +62,23 @@ app.KeyboardView = Backbone.View.extend({
     },
 
     render: function () {
-        app.Keyboard.where({
+        this.keyboard.where({
             color: 'white'
-        }).forEach(function (model) {
+        }).forEach(function (keyModel) {
             var view = new app.WhiteKeyView({
-                model: model
-            }, model.get('x'));
-            this.append(view.render().el);
-        }, this.$el);
+                model: keyModel
+            }, keyModel.get('x'), this.model);
+            this.$el.append(view.render().el);
+        }, this);
 
-        app.Keyboard.where({
+        this.keyboard.where({
             color: 'black'
-        }).forEach(function (model) {
+        }).forEach(function (keyModel) {
             var view = new app.BlackKeyView({
-                model: model
-            }, model.get('x'));
-            this.append(view.render().el);
-        }, this.$el);
+                model: keyModel
+            }, keyModel.get('x'), this.model);
+            this.$el.append(view.render().el);
+        }, this);
 
         this.$el.width(app.Keyboard.where({
             color: 'white'

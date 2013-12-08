@@ -3,12 +3,12 @@ var app = app || {};
 app.KeyView = app.SvgBackboneView.extend({
     tagName: 'rect',
 
-    initialize: function (model, x) {
+    initialize: function (model, x, chord) {
         this.x = x;
-
+        this.chord = chord;
+        
         this.listenTo(this.model, 'change', this.render);
         this.listenTo(this.model, 'change', this.updateUrl);
-        this.listenTo(this.model, 'change', this.raiseEvent);
     },
 
     id: function () {
@@ -33,6 +33,17 @@ app.KeyView = app.SvgBackboneView.extend({
 
     toggleSelect: function (e) {
         this.model.set('selected', !this.model.get('selected'));
+        this.updateNotes();
+    },
+
+    updateNotes: function () {
+        var selectedNotes = app.Keyboard.where({
+            selected: true
+        }).map(function (a) {
+            return a.id;
+        });
+
+        this.chord.set('notes', selectedNotes);
     },
 
     updateUrl: function () {
@@ -42,16 +53,6 @@ app.KeyView = app.SvgBackboneView.extend({
         app.Router.navigate('diagram/' + selectedNotes.map(function (a) {
             return a.id;
         }).join());
-    },
-
-    raiseEvent: function () {
-        var selectedNotes = app.Keyboard.where({
-            selected: true
-        }).map(function (a) {
-            return a.id;
-        });
-
-        events.trigger('chord changed', selectedNotes);
     }
 });
 

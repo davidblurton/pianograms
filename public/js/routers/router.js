@@ -3,6 +3,10 @@ var Router = Backbone.Router.extend({
         'diagram/*query': 'diagram'
     },
 
+    initialize: function (options) {
+        this.model = options.model;
+    },
+
     diagram: function (query) {
         var notes = query.split(',');
 
@@ -12,7 +16,7 @@ var Router = Backbone.Router.extend({
                 selected: true
             });
         });
+
+        //this.model.set('notes', notes);
     }
 });
-
-app.Router = new Router();
