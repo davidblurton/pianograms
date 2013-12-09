@@ -1,6 +1,6 @@
 var app = app || {};
 
-app.SvgBackboneView = Backbone.View.extend({
+app.SvgView = Backbone.View.extend({
     nameSpace: "http://www.w3.org/2000/svg",
     _ensureElement: function () {
         if (!this.el) {

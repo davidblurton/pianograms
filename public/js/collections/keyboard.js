@@ -1,87 +1,51 @@
 var app = app || {};
 
-// remove this
-var Keyboard = Backbone.Collection.extend({
-    model: app.Key,
-
-    url: 'diagram'
-});
-
-app.Keyboard = new Keyboard();
-
 app.KeyboardView = Backbone.View.extend({
     el: $('#keyboard'),
 
     initialize: function () {
-        this.keyboard = app.Keyboard;
+        var self = this;
 
-        this.listenTo(this.keyboard, 'reset', this.render);
-        this.keyboard.reset(this.createKeys());
-    },
-
-    createKeys: function () {
-        var whiteKeyWidth = app.KeyView.whiteKeyWidth,
-            blackKeyWidth = app.KeyView.blackKeyWidth,
-
-            i = 0,
-            keys = [],
-            octaves = 3;
-
-        for (var index = 0; index < 7 * octaves; index++) {
-            i = keys.push(createWhiteKey(index, this.whiteKeyWidth));
-
-            if (hasBlackKey(index)) {
-                i = keys.push(createBlackKey(index, this.blackKeyWidth));
-            }
-        }
-
-        return keys;
-
-        function createWhiteKey(index) {
-            return createKey(index * whiteKeyWidth, 'white');
-        }
-
-        function createBlackKey(index) {
-            return createKey((index + 1) * whiteKeyWidth - blackKeyWidth / 2, 'black');
-        }
-
-        function createKey(x, color) {
-            return new app.Key({
-                x: x,
-                color: color,
-                id: i
+        $('#keyboard > .key').each(function (note) {
+            new app.KeyView({
+                el: $('#' + note)[0],
+                model: self.model
             });
-        }
+        });
 
-        function hasBlackKey(index) {
-            var i = index % 7;
-            return i !== 2 && i !== 6;
-        }
+        this.listenTo(this.model, 'change', this.render);
+        this.listenTo(this.model, 'change', this.updateUrl);
     },
 
     render: function () {
-        this.keyboard.where({
-            color: 'white'
-        }).forEach(function (keyModel) {
-            var view = new app.WhiteKeyView({
-                model: keyModel
-            }, keyModel.get('x'), this.model);
-            this.$el.append(view.render().el);
-        }, this);
+        var notes = this.model.get('notes');
 
-        this.keyboard.where({
-            color: 'black'
-        }).forEach(function (keyModel) {
-            var view = new app.BlackKeyView({
-                model: keyModel
-            }, keyModel.get('x'), this.model);
-            this.$el.append(view.render().el);
-        }, this);
-
-        this.$el.width(app.Keyboard.where({
-            color: 'white'
-        }).length * app.KeyView.whiteKeyWidth)
+        notes.forEach(function (note) {
+            $('#' + note).addClass('selected');
+        });
 
         return this;
     },
+
+    updateUrl: function () {
+        var selectedNotes = this.model.get('notes');
+
+        app.Router.navigate('diagram/' + selectedNotes.join());
+    }
+});
+
+app.KeyView = app.SvgView.extend({
+    events: {
+        'click': 'toggleSelect'
+    },
+
+    toggleSelect: function (event) {
+        $(this.$el).toggleClass('selected');
+
+        var notes = $('.selected').map(function (index, note) {
+            return note.id;
+        }).toArray();
+
+        this.model.set('notes', notes);
+    }
 });
