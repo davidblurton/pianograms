@@ -8,7 +8,7 @@ app.Chord = Backbone.Model.extend({
     },
 
     url: function () {
-        return 'diagram/' + this.get('notes').join();
+        return 'chord/' + this.get('notes').join();
     }
 });
 
