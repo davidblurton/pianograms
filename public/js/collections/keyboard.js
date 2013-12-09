@@ -28,13 +28,11 @@ app.KeyboardView = Backbone.View.extend({
     },
 
     updateUrl: function () {
-        var selectedNotes = this.model.get('notes');
-
-        app.Router.navigate('diagram/' + selectedNotes.join());
+        app.Router.navigate(this.model.url());
     }
 });
 
-app.KeyView = app.SvgView.extend({
+app.KeyView = Backbone.View.extend({
     events: {
         'click': 'toggleSelect'
     },
