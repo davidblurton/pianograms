@@ -3,10 +3,6 @@ var Router = Backbone.Router.extend({
         'diagram/*query': 'diagram'
     },
 
-    initialize: function (options) {
-        this.model = options.model;
-    },
-
     diagram: function (query) {
         var notes = query.split(',');
 

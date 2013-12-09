@@ -16,7 +16,6 @@ app.ChordView = Backbone.View.extend({
     el: $('#chord-description'),
 
     initialize: function (options) {
-        this.model = options.model;
         this.listenTo(this.model, 'change:notes change:key', this.render);
     },
 

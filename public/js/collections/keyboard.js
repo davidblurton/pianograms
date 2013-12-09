@@ -12,12 +12,10 @@ app.Keyboard = new Keyboard();
 app.KeyboardView = Backbone.View.extend({
     el: $('#keyboard'),
 
-    initialize: function (options) {
-        this.model = options.model;
+    initialize: function () {
         this.keyboard = app.Keyboard;
 
         this.listenTo(this.keyboard, 'reset', this.render);
-        
         this.keyboard.reset(this.createKeys());
     },
 
