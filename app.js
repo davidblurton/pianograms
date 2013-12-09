@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -8,6 +7,9 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+
+var fs = require('fs'),
+    xml2js = require('xml2js');
 
 var app = express();
 
@@ -25,12 +27,42 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+    app.use(express.errorHandler());
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+app.get('/diagram/:notes', function (req, res) {
+
+    var parser = new xml2js.Parser();
+    fs.readFile('public/images/piano.svg', function (err, data) {
+        parser.parseString(data, function (err, result) {
+            var notes = req.params.notes.split(',').map(function (note) {
+                return parseInt(note);
+            });
+
+
+            for (var elem in result.svg.rect) {
+                for (var note in notes) {
+                    var rect = result.svg.rect[elem].$;
+
+                    if (rect.id == notes[note]) {
+                        rect.class += ' selected';
+                    }
+                }
+            }
+
+            var builder = new xml2js.Builder();
+            var xml = builder.buildObject(result);
+
+
+            res.send(xml);
+        });
+    });
+});
+
+//app.get('/users', user.list);
+
+http.createServer(app).listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
 });
