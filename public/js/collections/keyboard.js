@@ -43,7 +43,7 @@ app.KeyView = app.SvgView.extend({
         $(this.$el).toggleClass('selected');
 
         var notes = $('.selected').map(function (index, note) {
-            return note.id;
+            return parseInt(note.id);
         }).toArray();
 
         this.model.set('notes', notes);
