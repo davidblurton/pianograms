@@ -1,31 +1,31 @@
 var app = app || {};
 
-app.Chord = Backbone.Model.extend({    
+app.Chord = Backbone.Model.extend({
     defaults: {
         key: 0, // C
         major: true,
         notes: []
     },
-    
+
     url: function () {
         return 'diagram/' + notes.join();
     }
 });
 
-app.ChordView = Backbone.View.extend({    
+app.ChordView = Backbone.View.extend({
     el: $('#chord-description'),
 
     initialize: function (options) {
         this.model = options.model;
-        this.listenTo(this.model, 'change', this.render)
+        this.listenTo(this.model, 'change:notes change:key', this.render);
     },
 
-    render: function (notes) {        
+    render: function (notes) {
         var majorExtentionNames = ['1', 'b9', '9', '#9', '3', '11', '#11', '5', 'b13', '13', '7', 'maj7'];
 
-        var keyId = 8; // Ab
+        var keyId = this.model.get('key');
         var keyOffset = 12 - keyId;
-        
+
         var extensions = this.model.get('notes').map(function (note) {
             return majorExtentionNames[(note + keyOffset) % 12];
         });
@@ -33,4 +33,45 @@ app.ChordView = Backbone.View.extend({
         this.$el.text(extensions.join(' '));
         return this;
     },
+});
+
+app.KeyPicker = Backbone.View.extend({
+    el: $('#key-picker'),
+
+    initialize: function () {
+        this.render();
+    },
+
+    events: {
+        'change': 'changeKey'
+    },
+
+    render: function () {
+        var keys = {
+            'C': 0,
+            'C# / Db': 1,
+            'D': 2,
+            'D# / Eb': 3,
+            'E': 4,
+            'F': 5,
+            'F# / Gb': 6,
+            'G': 7,
+            'G# / Ab': 8,
+            'A': 9,
+            'A# / Bb': 10,
+            'B': 11
+        };
+
+        for (key in keys) {
+            var element = $('<option value="' + keys[key] + '">' + key + '</option>'); // use a template instead
+            this.$el.append(element);
+        }
+
+        return this;
+    },
+
+    changeKey: function (e) {
+        var key = this.el.options[this.el.selectedIndex].value;
+        this.model.set('key', key);
+    }
 });
