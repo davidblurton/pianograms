@@ -22,6 +22,7 @@ app.ChordView = Backbone.View.extend({
 
     render: function (notes) {
         var majorExtentionNames = ['1', 'b9', '9', '#9', '3', '11', '#11', '5', 'b13', '13', '7', 'maj7'];
+        var minorExtentionNames = ['1', 'b9', '9', '3', 'b11', '11', 'b5', '5', 'b13', '13', '7', 'maj7'];
 
         // if contains 1,3,5 append key
         // if contains 7,9,11,13 append respective number
