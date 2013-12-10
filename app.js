@@ -55,8 +55,8 @@ app.get('/diagram/:notes', function (req, res) {
             var builder = new xml2js.Builder();
             var xml = builder.buildObject(result);
 
-            res.writeHeader(200, {'Content-Type': 'image/svg+xml'});
-            res.end(xml);
+            res.set('Content-Type', 'image/svg+xml');
+            res.send(xml);
         });
     });
 });
