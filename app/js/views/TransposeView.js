@@ -8,7 +8,8 @@ define([
     el: $('#transpose'),
 
     events: {
-      'click': 'transposeUp'
+      'click .up': 'transposeUp',
+      'click .down': 'transposeDown'
     },
 
     transposeUp: function () {
@@ -27,6 +28,13 @@ define([
       });
 
       this.model.set('notes', transposed);
+
+      var key = this.model.get('key');
+      console.log(key);
+      var newKey = (key + 12 + amount) % 12; // handle negative numbers
+
+      console.log(newKey);
+      this.model.set('key', newKey);
     }
   });
 
