@@ -7,11 +7,16 @@ define(function(require, exports, module) {
   // Defining the application router.
   module.exports = Backbone.Router.extend({
     routes: {
-      "": "index"
+        'chord/*query': 'setNotes'
     },
 
-    index: function() {
-      console.log("Welcome to your / route.");
+    initialize: function(options){
+        this.model = options.model;
+    },
+
+    setNotes: function (query) {
+        var notes = query.split(',');
+        this.model.set('notes', notes);
     }
   });
 });
