@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'app')));
 
 // development only
 if ('development' == app.get('env')) {
@@ -35,12 +35,11 @@ app.get('/', routes.index);
 app.get('/diagram/:notes', function (req, res) {
 
     var parser = new xml2js.Parser();
-    fs.readFile('public/images/piano.svg', function (err, data) {
+    fs.readFile('app/images/piano.svg', function (err, data) {
         parser.parseString(data, function (err, result) {
             var notes = req.params.notes.split(',').map(function (note) {
                 return parseInt(note);
             });
-
 
             for (var elem in result.svg.rect) {
                 for (var note in notes) {

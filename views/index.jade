@@ -3,3 +3,13 @@ extends layout
 block content
   main(role='main' id='main')
 
+  include ../app/images/piano.svg
+
+  p#chord-description
+
+  p key:
+      select#key-picker
+
+  #transpose
+    button.up +
+    button.down -
