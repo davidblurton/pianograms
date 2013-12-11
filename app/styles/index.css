@@ -1,0 +1,15 @@
+/*-- HTML5 Boilerplate. -----------------------------------------------------*/
+
+@import "../../vendor/bower/html5-boilerplate/css/normalize.css";
+@import "../../vendor/bower/html5-boilerplate/css/main.css";
+
+/*-- Application stylesheets. -----------------------------------------------*/
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}

@@ -67,7 +67,7 @@ app.KeyPicker = Backbone.View.extend({
             'B': 11
         };
 
-        for (key in keys) {
+        for (var key in keys) {
             var element = $('<option value="' + keys[key] + '">' + key + '</option>'); // use a template instead
             this.$el.append(element);
         }

@@ -13,3 +13,7 @@ results
 build
 
 node_modules
+/dist/
+/node_modules/
+/vendor/bower/
+/test/coverage/
