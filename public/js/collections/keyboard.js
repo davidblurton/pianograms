@@ -1,49 +1,53 @@
 var app = app || {};
 
 app.KeyboardView = Backbone.View.extend({
-    el: $('#keyboard'),
+  el: $('#keyboard'),
 
-    initialize: function () {
-        var self = this;
+  initialize: function () {
+    var self = this;
 
-        $('#keyboard > .key').each(function (note) {
-            new app.KeyView({
-                el: $('#' + note)[0],
-                model: self.model
-            });
-        });
+    $('#keyboard > .key').each(function (note) {
+      new app.KeyView({
+        el: $('#' + note)[0],
+        model: self.model
+      });
+    });
 
-        this.listenTo(this.model, 'change', this.render);
-        this.listenTo(this.model, 'change', this.updateUrl);
-    },
+    this.listenTo(this.model, 'change', this.render);
+    this.listenTo(this.model, 'change', this.updateUrl);
+  },
 
-    render: function () {
-        var notes = this.model.get('notes');
+  render: function () {
+    $('.selected').each(function (index, note) {
+      $(note).removeClass('selected');
+    });
 
-        notes.forEach(function (note) {
-            $('#' + note).addClass('selected');
-        });
+    var notes = this.model.get('notes');
 
-        return this;
-    },
+    notes.forEach(function (note) {
+      $('#' + note).addClass('selected');
+    });
 
-    updateUrl: function () {
-        app.Router.navigate(this.model.url());
-    }
+    return this;
+  },
+
+  updateUrl: function () {
+    app.Router.navigate(this.model.url());
+  }
 });
 
 app.KeyView = Backbone.View.extend({
-    events: {
-        'click': 'toggleSelect'
-    },
+  events: {
+    'click': 'toggleSelect'
+  },
 
-    toggleSelect: function (event) {
-        $(this.$el).toggleClass('selected');
+  toggleSelect: function (event) {
+    $(this.$el).toggleClass('selected');
 
-        var notes = $('.selected').map(function (index, note) {
-            return parseInt(note.id);
-        }).toArray();
+    var notes = $('.selected').map(function (index, note) {
+      return parseInt(note.id);
+    }).toArray();
 
-        this.model.set('notes', notes);
-    }
+    this.model.set('notes', notes);
+  }
 });

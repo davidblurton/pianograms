@@ -1,31 +1,35 @@
 var app = app || {};
 
 app.AppView = Backbone.View.extend({
-    el: $('#app')
+  el: $('#app')
 });
 
 $(function () {
-    var chord = new app.Chord();
+  var chord = new app.Chord();
 
-    new app.KeyboardView({
-        model: chord
-    });
+  new app.KeyboardView({
+    model: chord
+  });
 
-    new app.AppView();
+  new app.AppView();
 
-    new app.ChordView({
-        model: chord
-    });
+  new app.ChordView({
+    model: chord
+  });
 
-    new app.KeyPicker({
-        model: chord
-    });
+  new app.KeyPicker({
+    model: chord
+  });
 
-    app.Router = new Router({
-        model: chord
-    });
+  new app.Transpose({
+    model: chord
+  });
 
-    Backbone.history.start({
-        pushState: false
-    });
+  app.Router = new Router({
+    model: chord
+  });
+
+  Backbone.history.start({
+    pushState: false
+  });
 });
