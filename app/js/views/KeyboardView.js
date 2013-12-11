@@ -26,13 +26,19 @@ define([
 
     render: function () {
       $('.selected').each(function (index, note) {
-        $(note).removeClass('selected');
+        //$(note).removeClass('selected');
+        var element = $(note);
+        var currentClass = element.attr('class');
+        element.attr('class', currentClass.split(' selected')[0]);
       });
 
       var notes = this.model.get('notes');
 
       notes.forEach(function (note) {
-        $('#' + note).addClass('selected');
+        //$('#' + note).addClass('selected');
+        var element = $('#' + note);
+        var currentClass = element.attr('class');
+        element.attr('class', currentClass + ' selected');
       });
 
       return this;

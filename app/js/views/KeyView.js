@@ -10,19 +10,23 @@ define([
     },
 
     toggleSelect: function (event) {
-      var currentClass = $(this.$el).attr('class');
-
-      if (currentClass.indexOf('selected') === -1) {
-        $(this.$el).attr('class', currentClass + ' selected');
-      } else {
-        $(this.$el).attr('class', currentClass.split(' selected')[0]);
-      }
+      this.toggleClass(this.$el);
 
       var notes = $('.selected').map(function (index, note) {
         return parseInt(note.id);
       }).toArray();
 
       this.model.set('notes', notes);
+    },
+
+    toggleClass: function(element){
+      var currentClass = element.attr('class');
+
+      if (currentClass.indexOf('selected') === -1) {
+        element.attr('class', currentClass + ' selected');
+      } else {
+        element.attr('class', currentClass.split(' selected')[0]);
+      }
     }
   });
 
