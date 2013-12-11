@@ -1,17 +1,4 @@
 extends layout
 
 block content
-  #app
-    include ../public/images/piano.svg
-
-    p#chord-description
-
-    p key:
-        select#key-picker
-
-
-block scripts
-  script(src='js/views/chord.js')
-  script(src='js/collections/keyboard.js')
-  script(src='js/views/app.js')
-  script(src='js/routers/router.js')
+  main(role='main' id='main')
