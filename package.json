@@ -27,15 +27,14 @@
     "grunt-cli": "*",
     "coveralls": "*"
   },
-    
+
   "dependencies": {
     "express": "3.4.6",
-    "jade": "*",
-    "xml2js": "~0.4.0"
+    "jade": "*"
   },
 
   "scripts": {
-    "start": "node app.js", 
+    "start": "node server",
     "test": "grunt karma:run coveralls"
   }
 }
