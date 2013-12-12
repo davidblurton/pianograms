@@ -14,6 +14,9 @@ var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
+var requirejs = require('requirejs'); // used to load modules shared between node and browser
+var noteConverter = requirejs('./app/js/modules/NoteConverter');
+
 var fs = require('fs');
 var app = express();
 
@@ -43,8 +46,10 @@ fs.readFile('app/images/piano.svg', function (err, data) {
 app.get('/', routes.index);
 
 app.get('/diagram/:notes', function (req, res) {
-  var notes = req.params.notes;
-  var style = notes.split(',').map(function(note){
+  var query = req.params.notes;
+  var notes = noteConverter.parseNotes(query);
+
+  var style = notes.map(function(note){
     return '[id="' + note + '"] ';
   }) + ' { fill: #FFF691; } ';
 

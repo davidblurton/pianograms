@@ -28,7 +28,7 @@
   "dependencies": {
     "express": "3.4.6",
     "jade": "*",
-    "amdefine": "~0.1.0"
+    "requirejs": "~2.1.9"
   },
   "scripts": {
     "start": "node server",
