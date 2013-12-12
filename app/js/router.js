@@ -19,13 +19,18 @@ define(['jquery',
 
     setNotes: function (query) {
       if (query) {
+        console.log(query);
         var notes = query.split(',');
 
-        if (_.all(notes, function (note) {
-          return _.isNumber(note);
-        })) {
+        var numbersRegExp = new RegExp('^[0-9,]*$');
+        var lettersRegExp = new RegExp('^[A-Gb#,]*$');
+
+        if (numbersRegExp.test(query)) {
+          console.log('matched numbers');
           this.model.set('notes', notes);
-        } else {
+        } else if (lettersRegExp.test(query)) {
+          console.log('matched letters');
+
           var noteNames = {
             'C': 0,
             'C#': 1,
@@ -58,7 +63,8 @@ define(['jquery',
           }
 
           this.model.set('notes', parsedNotes);
-          // parse note names into numbers
+        } else {
+          console.log('failed to parse ' + notes);
         }
       }
     }
@@ -89,7 +95,7 @@ define(['jquery',
     });
 
     Backbone.history.start({
-      pushState: true
+      pushState: false
     });
   };
 
