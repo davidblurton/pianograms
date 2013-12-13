@@ -8,6 +8,8 @@ var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
+var noteConverter = require(path.join(__dirname, 'app/js/modules/NoteConverter'));
+
 var fs = require('fs');
 var app = express();
 
@@ -30,14 +32,12 @@ if ('development' == app.get('env')) {
 }
 
 // cache piano template
-var pianoTemplate;
-fs.readFile('app/images/piano.svg', function (err, data) {
-  pianoTemplate = data.toString();
-});
 
 app.get('/', routes.index);
 
 app.get('/diagram/:notes', diagram.render);
+
+app.get('/:notes', diagram.render); // use regex for better matching
 
 //app.get('/users', user.list);
 
