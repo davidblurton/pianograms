@@ -24,6 +24,7 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
@@ -45,20 +46,7 @@ fs.readFile('app/images/piano.svg', function (err, data) {
 
 app.get('/', routes.index);
 
-app.get('/diagram/:notes', function (req, res) {
-  var query = req.params.notes;
-  var notes = noteConverter.parseNotes(query);
-
-  var style = notes.map(function(note){
-    return '[id="' + note + '"] ';
-  }) + ' { fill: #FFF691; } ';
-
-  var insertPosition = pianoTemplate.indexOf(']]>'); // end of css
-  var piano = pianoTemplate.insert(insertPosition, style);
-
-  res.set('Content-Type', 'image/svg+xml');
-  res.send(piano);
-});
+app.get('/diagram/:notes', routes.diagram);
 
 //app.get('/users', user.list);
 
