@@ -1,10 +1,3 @@
-String.prototype.insert = function (index, string) {
-  if (index > 0)
-    return this.substring(0, index) + string + this.substring(index, this.length);
-  else
-    return string + this;
-};
-
 /**
  * Module dependencies.
  */
@@ -14,7 +7,6 @@ var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 
-var requirejs = require('requirejs'); // used to load modules shared between node and browser
 var noteConverter = require(path.join(__dirname, 'app/js/modules/NoteConverter'));
 
 var fs = require('fs');

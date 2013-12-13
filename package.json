@@ -28,7 +28,6 @@
   "dependencies": {
     "express": "3.4.6",
     "jade": "*",
-    "requirejs": "~2.1.9",
     "amdefine": "~0.1.0"
   },
   "scripts": {
