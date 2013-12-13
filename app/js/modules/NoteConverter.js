@@ -62,6 +62,8 @@ define(function () {
         return noteNames[note];
       });
 
+
+      // should probably take no more than parsedNotes.length time to order the notes in the worst case.
       while (!this.notesAreInOrder(parsedNotes)) {
         this.orderNotes(parsedNotes);
       }
