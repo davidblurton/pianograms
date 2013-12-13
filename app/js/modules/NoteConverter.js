@@ -3,23 +3,41 @@ if (typeof define !== 'function') {
 }
 
 define(function () {
+  var numbersRegExp = new RegExp('^[0-9,]*$');
+  var lettersRegExp = new RegExp('^[A-Gb#,]*$');
+
   return {
-    parseNotes: function (noteString) {
-      var notes = noteString.split(',');
-
-      var numbersRegExp = new RegExp('^[0-9,]*$');
-      var lettersRegExp = new RegExp('^[A-Gb#,]*$');
-
-      if (numbersRegExp.test(noteString)) {
-        return notes;
-      } else if (lettersRegExp.test(noteString)) {
-        return this.parseLettersToNotes(notes);
-      } else {
-        return [];
+    parseNotes: function(noteString){
+      if(this.validNumbers(noteString)){
+        return this.parseNumbersToNotes(noteString);
       }
+
+      if(this.validLetters(noteString)){
+        return this.parseLettersToNotes(noteString);
+      }
+
+      return [];
     },
 
-    parseLettersToNotes: function (letters) {
+    validNumbers: function(noteString){
+      return numbersRegExp.test(noteString);
+    },
+
+    validLetters: function(noteString){
+      return lettersRegExp.test(noteString);
+    },
+
+    splitNoteString: function(noteString){
+      return noteString.split(',');
+    },
+
+    parseNumbersToNotes: function(noteString){
+      return this.splitNoteString(noteString);
+    },
+
+    parseLettersToNotes: function (noteString) {
+      var letters = this.splitNoteString(noteString);
+
       var noteNames = {
         'C': 0,
         'C#': 1,

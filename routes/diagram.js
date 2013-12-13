@@ -10,7 +10,9 @@ String.prototype.insert = function (index, string) {
     return string + this;
 };
 
-exports.diagram = function (req, res) {
+var noteConverter = require('../app/js/modules/NoteConverter');
+
+exports.render = function (req, res) {
   var query = req.params.notes;
   var notes = noteConverter.parseNotes(query);
 

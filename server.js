@@ -3,11 +3,10 @@
  */
 var express = require('express');
 var routes = require('./routes');
+var diagram = require('./routes/diagram');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
-
-var noteConverter = require(path.join(__dirname, 'app/js/modules/NoteConverter'));
 
 var fs = require('fs');
 var app = express();
@@ -38,7 +37,7 @@ fs.readFile('app/images/piano.svg', function (err, data) {
 
 app.get('/', routes.index);
 
-app.get('/diagram/:notes', routes.diagram);
+app.get('/diagram/:notes', diagram.render);
 
 //app.get('/users', user.list);
 
