@@ -11,6 +11,12 @@ String.prototype.insert = function (index, string) {
 };
 
 var noteConverter = require('../app/js/modules/NoteConverter');
+var fs = require('fs');
+
+var pianoTemplate;
+fs.readFile('app/images/piano.svg', function (err, data) {
+  pianoTemplate = data.toString();
+});
 
 exports.render = function (req, res) {
   var query = req.params.notes;
