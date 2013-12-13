@@ -25,23 +25,29 @@ define([
     },
 
     render: function () {
+      var self = this;
+
       $('.selected').each(function (index, note) {
-        //$(note).removeClass('selected');
-        var element = $(note);
-        var currentClass = element.attr('class');
-        element.attr('class', currentClass.split(' selected')[0]);
+        this.removeClass($(note), 'selected');
       });
 
       var notes = this.model.get('notes');
 
       notes.forEach(function (note) {
-        //$('#' + note).addClass('selected');
-        var element = $('#' + note);
-        var currentClass = element.attr('class');
-        element.attr('class', currentClass + ' selected');
+        self.addClass($('#' + note), 'selected');
       });
 
       return this;
+    },
+
+    removeClass: function (element, className) {
+      var currentClass = element.attr('class');
+      element.attr('class', currentClass.split(className)[0]);
+    },
+
+    addClass: function (element, className) {
+      var currentClass = element.attr('class');
+      element.attr('class', currentClass + ' ' + className);
     },
 
     updateUrl: function () {
