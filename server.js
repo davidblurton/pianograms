@@ -15,7 +15,7 @@ var http = require('http');
 var path = require('path');
 
 var requirejs = require('requirejs'); // used to load modules shared between node and browser
-var noteConverter = requirejs(path.join(__dirname, 'app/js/modules/NoteConverter'));
+var noteConverter = require(path.join(__dirname, 'app/js/modules/NoteConverter'));
 
 var fs = require('fs');
 var app = express();
