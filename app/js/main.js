@@ -6,7 +6,12 @@ require.config({
     'backbone': {
       deps: ['jquery', 'underscore'],
       exports: 'Backbone'
-    }
+    },
+    'bootstrap': {
+          deps: ['jquery'],
+          exports: "$.fn.popover"
+        },
+    enforceDefine: true
   },
 
   paths: {
@@ -15,6 +20,8 @@ require.config({
     backbone: 'libs/backbone/backbone-min',
     templates: '../templates',
     noteConverter: 'modules/NoteConverter'
+    noteConverter: 'modules/NoteConverter',
+    bootstrap: 'libs/bootstrap/bootstrap.min'
   }
 });
 
