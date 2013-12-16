@@ -12,7 +12,7 @@ define(function () {
       var majorExtentionNames = ['1', 'b9', '9', '#9', '3', '11', '#11', '5', 'b13', '13', '7', 'maj7'];
       var minorExtentionNames = ['1', 'b9', '9', '3', 'b11', '11', 'b5', '5', 'b13', '13', '7', 'maj7'];
 
-      var keyDescription = this.describeChord(key); //key name
+      var keyDescription = this.describeKey(key); //key name
 
       var majorExtensionDescriptions = ['', 'b9', '', '#9', '', '', '#11', '', 'b13', '', '7', 'maj7'];
 
@@ -22,6 +22,7 @@ define(function () {
       }
 
       // put 7 or maj7 first
+      // unique
 
       return keyDescription;
     },
