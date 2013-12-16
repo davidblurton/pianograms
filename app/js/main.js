@@ -19,8 +19,8 @@ require.config({
     underscore: 'libs/underscore/underscore-min',
     backbone: 'libs/backbone/backbone-min',
     templates: '../templates',
-    noteConverter: 'modules/NoteConverter'
     noteConverter: 'modules/NoteConverter',
+    chordNamer: 'modules/ChordNamer',
     bootstrap: 'libs/bootstrap/bootstrap.min'
   }
 });

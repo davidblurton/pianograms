@@ -28,7 +28,7 @@ define([
       var self = this;
 
       $('.selected').each(function (index, note) {
-        this.removeClass($(note), 'selected');
+        self.removeClass($(note), 'selected');
       });
 
       var notes = this.model.get('notes');
