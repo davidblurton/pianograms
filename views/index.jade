@@ -1,15 +1,12 @@
 extends layout
 
 block content
-  main(role='main' id='main')
 
-  include ../app/images/piano.svg
+  header
+    .container
+      img(src="images/logo.svg" width="32" height="32")
+      .brand Pianograms
 
-  p#chord-description
-
-  p key:
-      select#key-picker
-
-  #transpose
-    button.up +
-    button.down -
+  main
+    .container
+      #page
