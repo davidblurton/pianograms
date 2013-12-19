@@ -6,12 +6,7 @@ require.config({
     'backbone': {
       deps: ['jquery', 'underscore'],
       exports: 'Backbone'
-    },
-    'bootstrap': {
-          deps: ['jquery'],
-          exports: "$.fn.popover"
-        },
-    enforceDefine: true
+    }
   },
 
   paths: {
