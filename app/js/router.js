@@ -6,16 +6,21 @@ define(['jquery',
 
   var Router = Backbone.Router.extend({
     routes: {
-      'chord/*query': 'setNotes'
+      'chord/*notes': 'setNotes'
     },
 
     initialize: function (options) {
       this.model = options.model;
+      this.listenTo(this.model, 'change', this.updateUrl);
     },
 
-    setNotes: function (query) {
-      if (query) {
-        var parsedNotes = noteConverter.parseNotes(query);
+    updateUrl: function(){
+      this.navigate(this.model.url());
+    },
+
+    setNotes: function (notes) {
+      if (notes) {
+        var parsedNotes = noteConverter.parseNotes(notes);
         this.model.set('notes', parsedNotes);
       }
     }

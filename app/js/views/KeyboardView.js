@@ -21,7 +21,6 @@ define([
       });
 
       this.listenTo(this.model, 'change', this.render);
-      this.listenTo(this.model, 'change', this.updateUrl);
     },
 
     render: function () {
@@ -48,10 +47,6 @@ define([
     addClass: function (element, className) {
       var currentClass = element.attr('class');
       element.attr('class', currentClass + ' ' + className);
-    },
-
-    updateUrl: function () {
-      this.router.navigate(this.model.url());
     }
   });
 
