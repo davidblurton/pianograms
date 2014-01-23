@@ -1,5 +1,5 @@
 if (typeof define !== 'function') {
-    var define = require('amdefine')(module);
+  var define = require('amdefine')(module);
 }
 
 define(function () {
@@ -7,32 +7,34 @@ define(function () {
   var lettersRegExp = new RegExp('^[A-Gb#,]*$');
 
   return {
-    parseNotes: function(noteString){
-      if(this.validNumbers(noteString)){
+    parseNotes: function (noteString) {
+      if (this.validNumbers(noteString)) {
         return this.parseNumbersToNotes(noteString);
       }
 
-      if(this.validLetters(noteString)){
+      if (this.validLetters(noteString)) {
         return this.parseLettersToNotes(noteString);
       }
 
       return [];
     },
 
-    validNumbers: function(noteString){
+    validNumbers: function (noteString) {
       return numbersRegExp.test(noteString);
     },
 
-    validLetters: function(noteString){
+    validLetters: function (noteString) {
       return lettersRegExp.test(noteString);
     },
 
-    splitNoteString: function(noteString){
+    splitNoteString: function (noteString) {
       return noteString.split(',');
     },
 
-    parseNumbersToNotes: function(noteString){
-      return this.splitNoteString(noteString);
+    parseNumbersToNotes: function (noteString) {
+      return this.splitNoteString(noteString).map(function (note) {
+        return parseInt(note);
+      });
     },
 
     parseLettersToNotes: function (noteString) {
@@ -89,11 +91,11 @@ define(function () {
       }
     },
 
-    numbersRegExp: function(){
+    numbersRegExp: function () {
       return numbersRegExp.toString();
     },
 
-    lettersRegExp: function(){
+    lettersRegExp: function () {
       return lettersRegExp.toString();
     }
   };
