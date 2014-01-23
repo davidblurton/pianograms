@@ -31,6 +31,7 @@ require([
   'router',
   'models/Chord'
 ], function (AppView, Router, Chord) {
+
   var model = new Chord();
 
   var appView = new AppView({
