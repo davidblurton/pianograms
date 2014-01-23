@@ -8,11 +8,16 @@ define([
     defaults: {
       key: 0, // C
       major: true,
-      notes: []
+      useFlats: true,
+      notes: [12, 16, 19]
     },
 
     url: function () {
-      return 'chord/' + this.get('notes').join();
+      return this.get('notes').join();
+    },
+
+    diagramUrl: function () {
+      return 'http://pianogr.am/' + this.url();
     }
   });
 
