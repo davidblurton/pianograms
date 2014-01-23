@@ -4,43 +4,18 @@ define(['jquery',
         'noteConverter',
         'router',
         'models/Chord',
-        'views/KeyboardView',
-        'views/ChordView',
-        'views/KeyPickerView',
-        'views/TransposeView',
-        'text!/../images/piano.svg'
-       ], function ($, _, Backbone, noteConverter, Router, Chord, KeyboardView, ChordView, KeyPickerView, TransposeView, pianoTemplate) {
+        'views/KeyboardView'
+       ], function ($, _, Backbone, noteConverter, Router, Chord, KeyboardView) {
 
   var AppView = Backbone.View.extend({
     el: $('#page'),
 
-    initialize: function (options) {
-      this.chord = new Chord();
-
-      new ChordView({
-        model: this.chord
-      });
-
-      new KeyPickerView({
-        model: this.chord
-      });
-
-      new TransposeView({
-        model: this.chord
-      });
-    },
-
     render: function () {
-      this.$el.append(pianoTemplate);
-
-      var router = new Router({
-        model: this.chord
+      var keyboardView = new KeyboardView({
+        model: this.model
       });
 
-      new KeyboardView({
-        model: this.chord,
-        router: router
-      });
+      this.$el.append(keyboardView.render().$el);
     }
   });
 
