@@ -15,7 +15,7 @@ define(['jquery',
     },
 
     updateUrl: function () {
-      this.navigate(this.model.url());
+      this.navigate('chord/' + this.model.url());
     },
 
     setNotes: function (notes) {
