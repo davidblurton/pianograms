@@ -1,52 +1,38 @@
 define([
   'jquery',
+  'jquerySvgDom',
   'underscore',
   'backbone',
   'views/KeyView',
-  'router'
-], function ($, _, Backbone, KeyView, Router) {
+  'router',
+  'text!/../images/piano.svg'
+], function ($, svgDom, _, Backbone, KeyView, Router, KeyboardTemplate) {
 
   var KeyboardView = Backbone.View.extend({
-    el: $('#keyboard'),
-
     initialize: function (options) {
-      var self = this;
-      this.router = options.router;
+      this.listenTo(this.model, 'change', this.updateNotes);
+    },
 
-      $('#keyboard > .key').each(function (note) {
-        new KeyView({
-          el: $('#' + note)[0],
-          model: self.model
-        });
-      });
-
-      this.listenTo(this.model, 'change', this.render);
+    events: {
+      'click': 'toggleSelect'
     },
 
     render: function () {
-      var self = this;
-
-      $('.selected').each(function (index, note) {
-        self.removeClass($(note), 'selected');
-      });
-
-      var notes = this.model.get('notes');
-
-      notes.forEach(function (note) {
-        self.addClass($('#' + note), 'selected');
-      });
-
+      this.$el.html(KeyboardTemplate);
       return this;
     },
 
-    removeClass: function (element, className) {
-      var currentClass = element.attr('class');
-      element.attr('class', currentClass.split(className)[0]);
+    toggleSelect: function (e) {
+      $(e.target).toggleClass('selected');
+      this.updateNotes();
     },
 
-    addClass: function (element, className) {
-      var currentClass = element.attr('class');
-      element.attr('class', currentClass + ' ' + className);
+    updateNotes: function(){
+      var notes = $('svg .selected').map(function(index, elem) {
+        return parseInt($(elem).attr('id'));
+      }).toArray();
+
+      this.model.set('notes', notes);
     }
   });
 
