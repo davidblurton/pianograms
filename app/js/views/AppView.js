@@ -1,11 +1,9 @@
 define(['jquery',
         'underscore',
         'backbone',
-        'noteConverter',
-        'router',
         'models/Chord',
         'views/KeyboardView'
-       ], function ($, _, Backbone, noteConverter, Router, Chord, KeyboardView) {
+       ], function ($, _, Backbone, Chord, KeyboardView) {
 
   var AppView = Backbone.View.extend({
     el: $('#page'),
