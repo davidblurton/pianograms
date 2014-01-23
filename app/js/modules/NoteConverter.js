@@ -32,9 +32,7 @@ define(function () {
     },
 
     parseNumbersToNotes: function (noteString) {
-      return this.splitNoteString(noteString).map(function (note) {
-        return parseInt(note);
-      });
+      return this.splitNoteString(noteString);
     },
 
     parseLettersToNotes: function (noteString) {
