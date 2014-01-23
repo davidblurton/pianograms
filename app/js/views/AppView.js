@@ -2,8 +2,9 @@ define(['jquery',
         'underscore',
         'backbone',
         'models/Chord',
-        'views/KeyboardView'
-       ], function ($, _, Backbone, Chord, KeyboardView) {
+        'views/KeyboardView',
+        'views/LinkView'
+       ], function ($, _, Backbone, Chord, KeyboardView, LinkView) {
 
   var AppView = Backbone.View.extend({
     el: $('#page'),
@@ -14,6 +15,13 @@ define(['jquery',
       });
 
       this.$el.append(keyboardView.render().$el);
+
+      var linkView = new LinkView({
+        model: this.model
+      });
+
+      this.$el.append('<p>Link to this diagram:</p>'); // Hack: use a template
+      this.$el.append(linkView.render().$el);
     }
   });
 
