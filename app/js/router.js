@@ -2,7 +2,7 @@ define(['jquery',
         'underscore',
         'backbone',
         'noteConverter',
-       ], function ($, _, Backbone, noteConverter) {
+       ], function ($, _, Backbone, NoteConverter) {
 
   var Router = Backbone.Router.extend({
     routes: {
@@ -14,13 +14,13 @@ define(['jquery',
       this.listenTo(this.model, 'change', this.updateUrl);
     },
 
-    updateUrl: function(){
+    updateUrl: function () {
       this.navigate(this.model.url());
     },
 
     setNotes: function (notes) {
       if (notes) {
-        var parsedNotes = noteConverter.parseNotes(notes);
+        var parsedNotes = NoteConverter.parseNotes(notes);
         this.model.set('notes', parsedNotes);
       }
     }
