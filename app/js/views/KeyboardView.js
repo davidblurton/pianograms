@@ -9,6 +9,7 @@ define([
 ], function ($, svgDom, _, Backbone, KeyView, Router, KeyboardTemplate) {
 
   var KeyboardView = Backbone.View.extend({
+
     initialize: function (options) {
       this.listenTo(this.model, 'change', this.updateNotes);
     },
@@ -27,8 +28,8 @@ define([
       this.updateNotes();
     },
 
-    updateNotes: function(){
-      var notes = $('svg .selected').map(function(index, elem) {
+    updateNotes: function () {
+      var notes = $('svg .selected').map(function (index, elem) {
         return parseInt($(elem).attr('id'));
       }).toArray();
 
