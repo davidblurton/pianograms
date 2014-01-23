@@ -15,22 +15,25 @@ define([
     },
 
     events: {
-      'click': 'toggleSelect'
+      'click': 'toggleNote'
     },
 
-    render: function () {
+    render: function (model) {
       this.$el.html(KeyboardTemplate);
       return this;
     },
 
-    toggleSelect: function (e) {
-      $(e.target).toggleClass('selected');
-      this.updateNotes();
+    updateNotes: function () {
+      _.each(this.model.get('notes'), function (note) {
+        $('svg #' + note).addClass('selected');
+      });
     },
 
-    updateNotes: function () {
+    toggleNote: function (e) {
+      $(e.target).toggleClass('selected');
+
       var notes = $('svg .selected').map(function (index, elem) {
-        return parseInt($(elem).attr('id'));
+        return $(elem).attr('id');
       }).toArray();
 
       this.model.set('notes', notes);
