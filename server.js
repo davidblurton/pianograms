@@ -34,8 +34,6 @@ app.get('/', routes.index);
 
 app.get('/diagram/:notes', diagram.render);
 
-app.get('/:notes', diagram.render); // use regex for better matching
-
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
