@@ -1,4 +1,3 @@
-
 /*
  * Generate diagram.
  */
