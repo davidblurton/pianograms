@@ -17,8 +17,11 @@ define([
       this.listenTo(this.model, 'change', this.render);
     },
 
-    render: function (model) {
-      this.$el.val('<img src="' + this.model.diagramUrl() + '" />'); // use a template
+    render: function () {
+      if (this.model.get('notes')) {
+        this.$el.val('<img src="' + this.model.diagramUrl() + '" />'); // use a template
+      }
+
       return this;
     }
   });

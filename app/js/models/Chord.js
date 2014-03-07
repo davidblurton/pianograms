@@ -8,8 +8,7 @@ define([
     defaults: {
       key: 0, // C
       major: true,
-      useFlats: true,
-      notes: [12, 16, 19]
+      useFlats: true
     },
 
     url: function () {
