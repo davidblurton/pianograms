@@ -42,3 +42,7 @@ a {
 .linkTextbox {
   width: 100%;
 }
+
+svg {
+  cursor: pointer
+}
