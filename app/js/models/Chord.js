@@ -16,7 +16,8 @@ define([
     },
 
     diagramUrl: function () {
-      return 'http://pianogr.am/diagram/' + this.url();
+      var root = location.protocol + '//' + location.host;
+      return root + '/diagram/' + this.url();
     }
   });
 
