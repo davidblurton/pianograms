@@ -17,7 +17,7 @@ define([
     },
 
     diagramUrl: function () {
-      return 'http://pianogr.am/' + this.url();
+      return 'http://pianogr.am/diagram/' + this.url();
     }
   });
 

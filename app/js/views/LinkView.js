@@ -18,7 +18,7 @@ define([
     },
 
     render: function (model) {
-      this.$el.val(this.model.diagramUrl()); // use a template
+      this.$el.val('<img src="' + this.model.diagramUrl() + '" />'); // use a template
       return this;
     }
   });
