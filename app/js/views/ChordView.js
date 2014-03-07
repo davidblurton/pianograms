@@ -23,10 +23,9 @@ define([
 
     listExtensions: function () {
       var majorExtentionNames = ['1', 'b9', '9', '#9', '3', '11', '#11', '5', 'b13', '13', '7', 'maj7'];
-      var minorExtentionNames = ['1', 'b9', '9', '3', 'b11', '11', 'b5', '5', 'b13', '13', '7', 'maj7'];
+      var minorExtentionNames = ['1', 'b9', '9', '3', 'b11', '11', 'b5', '5', 'b6', '6', '7', 'maj7'];
 
-      var keyId = this.model.get('key');
-      var keyOffset = 12 - keyId;
+      var keyOffset = 12 - this.model.get('key');
 
       var extensions = this.model.get('notes').map(function (note) {
         return majorExtentionNames[(note + keyOffset) % 12];
