@@ -10,7 +10,7 @@ define(function () {
       });
 
       var majorExtentionNames = ['1', 'b9', '9', '#9', '3', '11', '#11', '5', 'b13', '13', '7', 'maj7'];
-      var minorExtentionNames = ['1', 'b9', '9', '3', 'b11', '11', 'b5', '5', 'b13', '13', '7', 'maj7'];
+      var minorExtentionNames = ['1', 'b9', '9', '3', 'b11', '11', 'b5', '5', 'b6', '6', '7', 'maj7'];
 
       var keyDescription = this.describeKey(key); //key name
 
