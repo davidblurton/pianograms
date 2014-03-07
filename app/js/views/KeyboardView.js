@@ -19,7 +19,8 @@ define([
     },
 
     render: function (model) {
-      this.$el.html(KeyboardTemplate);
+      this.$el.append('<p>Click keys to create a chord</p>')
+      this.$el.append(KeyboardTemplate);
       return this;
     },
 

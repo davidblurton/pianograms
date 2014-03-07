@@ -1,25 +1,23 @@
 define([
   'jquery',
   'underscore',
-  'backbone'
-], function ($, _, Backbone) {
+  'backbone',
+  'text!/templates/linkTemplate.html'
+], function ($, _, Backbone, linkTemplate) {
 
   var LinkView = Backbone.View.extend({
-    tagName: 'input',
-
-    className: 'linkTextbox',
-
-    attributes: {
-      'readonly': ''
-    },
-
     initialize: function (options) {
       this.listenTo(this.model, 'change', this.render);
     },
 
+    template: _.template(linkTemplate),
+
     render: function () {
       if (this.model.get('notes')) {
-        this.$el.val('<img src="' + this.model.diagramUrl() + '" />'); // use a template
+        var template = this.template({
+          model: this.model
+        });
+        this.$el.html(template);
       }
 
       return this;

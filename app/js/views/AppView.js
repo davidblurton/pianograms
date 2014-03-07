@@ -20,7 +20,6 @@ define(['jquery',
         model: this.model
       });
 
-      this.$el.append('<p>Embed this chord diagram:</p>'); // Hack: use a template
       this.$el.append(linkView.render().$el);
     }
   });
