@@ -73,10 +73,10 @@ define(function () {
       var orderedNotes = [];
       var current = 0;
 
-      for (var octave = 1; current < parsedNotes.length; octave++) {
+      for (var octave = 0; current < parsedNotes.length; octave++) {
         for (var i = 0; i < 12; i++) {
           if (parsedNotes[current] == i) {
-            orderedNotes.push(parsedNotes[current] * octave);
+            orderedNotes.push(parsedNotes[current] + (12 * octave));
             current++;
           }
         }
