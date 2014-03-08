@@ -86,14 +86,6 @@ define(function () {
           notes[i] = notes[i] + 12; // shift the note up an octave
         }
       }
-    },
-
-    numbersRegExp: function () {
-      return numbersRegExp.toString();
-    },
-
-    lettersRegExp: function () {
-      return lettersRegExp.toString();
     }
   };
 });
