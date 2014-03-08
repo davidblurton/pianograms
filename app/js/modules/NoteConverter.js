@@ -35,6 +35,14 @@ define(function () {
       return this.splitNoteString(noteString);
     },
 
+    parseNumbersToLetters: function (notes) {
+      var noteNames = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']; // support sharps
+
+      return notes.map(function(note) {
+        return noteNames[note % 12];
+      });
+    },
+
     parseLettersToNotes: function (noteString) {
       var letters = this.splitNoteString(noteString);
 
@@ -62,30 +70,19 @@ define(function () {
         return noteNames[note];
       });
 
-      // should probably take no more than parsedNotes.length time to order the notes in the worst case.
-      while (!this.notesAreInOrder(parsedNotes)) {
-        this.orderNotes(parsedNotes);
-      }
+      var orderedNotes = [];
+      var current = 0;
 
-      return parsedNotes;
-    },
-
-    notesAreInOrder: function (notes) {
-      for (var i = 1; i < notes.length; i++) {
-        if (notes[i] <= notes[i - 1]) {
-          return false;
+      for (var octave = 1; current < parsedNotes.length; octave++) {
+        for (var i = 0; i < 12; i++) {
+          if (parsedNotes[current] == i) {
+            orderedNotes.push(parsedNotes[current] * octave);
+            current++;
+          }
         }
       }
 
-      return true;
-    },
-
-    orderNotes: function (notes) {
-      for (var i = 1; i < notes.length; i++) {
-        if (notes[i] <= notes[i - 1]) {
-          notes[i] = notes[i] + 12; // shift the note up an octave
-        }
-      }
+      return orderedNotes;
     }
   };
 });

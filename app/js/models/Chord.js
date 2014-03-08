@@ -1,8 +1,9 @@
 define([
   'jquery',
   'underscore',
-  'backbone'
-], function ($, _, Backbone) {
+  'backbone',
+  'noteConverter'
+], function ($, _, Backbone, noteConverter) {
 
   var Chord = Backbone.Model.extend({
     defaults: {
@@ -12,7 +13,7 @@ define([
     },
 
     url: function () {
-      return this.get('notes').join();
+      return noteConverter.parseNumbersToLetters(this.get('notes'));
     },
 
     diagramUrl: function () {
