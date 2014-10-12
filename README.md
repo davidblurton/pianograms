@@ -1,4 +1,4 @@
 pianograms
 ==========
 
-Library for drawing piano voicing diagrams
+Service for drawing piano voicing diagrams
